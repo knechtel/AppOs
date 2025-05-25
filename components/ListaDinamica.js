@@ -4,7 +4,6 @@ import {
   View,
   Text,
   FlatList,
-  TextInput,
   Button,
   StyleSheet,
   Animated,
