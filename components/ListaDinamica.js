@@ -36,41 +36,43 @@ export default function ListaDinamica() {
     setItens([...itens, novo]);
     setNovoItem("");
   };
+ const alertItemName = (item) => {
+   console.log("maiquel () ==> " + item.name);
+ };
+ return (
+   <View style={styles.container}>
+     <Text style={styles.titulo}>Controle de Os.</Text>
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.titulo}>Lista Dinâmica</Text>
+     <FlatList
+       data={list}
+       keyExtractor={(item) => item.id}
+       renderItem={({ item }) => (
+         <TouchableOpacity
+           key={item.id}
+           style={styles.squareContainer}
+           onPress={() => alertItemName(item)}
+         >
+           <Text style={styles.text}>
+             {item.name} - {item.id}{" "}
+           </Text>
+         </TouchableOpacity>
+       )}
+     />
 
-      <FlatList
-        data={list}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            key={item.id}
-            style={styles.squareContainer}
-            onPress={() => this.alertItemName(item)}
-          >
-            <Text style={styles.text}>
-              {item.name} - {item.id}{" "}
-            </Text>
-          </TouchableOpacity>
-        )}
-      />
-
-      <TextInput
-        style={styles.input}
-        placeholder="Novo item"
-        value={novoItem}
-        onChangeText={setNovoItem}
-      />
-      <Button
-        onPress={adicionarItem}
-        style={{ marginBottom: 50 }}
-        title="Adicionar equipamento"
-        color="#841584"
-      />
-    </View>
-  );
+     <TextInput
+       style={styles.input}
+       placeholder="Novo item"
+       value={novoItem}
+       onChangeText={setNovoItem}
+     />
+     <Button
+       onPress={adicionarItem}
+       style={{ marginBottom: 50 }}
+       title="Adicionar equipamento"
+       color="#841584"
+     />
+   </View>
+ );
 }
 
 const styles = StyleSheet.create({
