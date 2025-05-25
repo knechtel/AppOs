@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import ListaDinamica from "./ListaDinamica";
+import ListaDinamica from "./components/ListaDinamica";
 
 export default function App() {
   return <ListaDinamica />;
