@@ -11,7 +11,7 @@ export default function App() {
       <Stack.Navigator initialRouteName="Clientes">
         <Stack.Screen name="Clientes" component={ListaDinamica} />
         <Stack.Screen
-          name="formCliente"
+          name="FormClient"
           component={FormClient}
           options={{ headerShown: false }}
         />
