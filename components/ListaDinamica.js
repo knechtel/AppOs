@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { FIND_ALL_CLIENT } from "../util/url";
-export default function ListaDinamica() {
+export default function ListaDinamica({ navigation }) {
   const [list, setList] = useState([]);
 
   useEffect(() => {
@@ -34,6 +34,10 @@ export default function ListaDinamica() {
   };
   const alertItemName = (item) => {
     console.log("maiquel () ==> " + item.name);
+    //navigation.navigate("Equipment", { paramKey: id });
+  };
+  const doClient = () => {
+    navigation.navigate("FormClient");
   };
   return (
     <View style={styles.container}>
@@ -56,7 +60,7 @@ export default function ListaDinamica() {
       />
 
       <Button
-        onPress={adicionarItem}
+        onPress={doClient}
         style={{ marginBottom: 50 }}
         title="Adicionar Cliente"
         color="#841584"
