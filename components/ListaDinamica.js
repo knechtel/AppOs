@@ -13,10 +13,7 @@ import {
 import { FIND_ALL_CLIENT } from "../util/url";
 export default function ListaDinamica() {
   const [list, setList] = useState([]);
-  const [itens, setItens] = useState([
-    { id: "1", nome: "Item 1" },
-    { id: "2", nome: "Item 2" },
-  ]);
+
   useEffect(() => {
     fetch(FIND_ALL_CLIENT) // Exemplo de API pública
       .then((response) => response.json())
@@ -36,43 +33,37 @@ export default function ListaDinamica() {
     setItens([...itens, novo]);
     setNovoItem("");
   };
- const alertItemName = (item) => {
-   console.log("maiquel () ==> " + item.name);
- };
- return (
-   <View style={styles.container}>
-     <Text style={styles.titulo}>Controle de Os.</Text>
+  const alertItemName = (item) => {
+    console.log("maiquel () ==> " + item.name);
+  };
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Controle de Os.</Text>
 
-     <FlatList
-       data={list}
-       keyExtractor={(item) => item.id}
-       renderItem={({ item }) => (
-         <TouchableOpacity
-           key={item.id}
-           style={styles.squareContainer}
-           onPress={() => alertItemName(item)}
-         >
-           <Text style={styles.text}>
-             {item.name} - {item.id}{" "}
-           </Text>
-         </TouchableOpacity>
-       )}
-     />
+      <FlatList
+        data={list}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            key={item.id}
+            style={styles.squareContainer}
+            onPress={() => alertItemName(item)}
+          >
+            <Text style={styles.text}>
+              {item.name} - {item.id}{" "}
+            </Text>
+          </TouchableOpacity>
+        )}
+      />
 
-     <TextInput
-       style={styles.input}
-       placeholder="Novo item"
-       value={novoItem}
-       onChangeText={setNovoItem}
-     />
-     <Button
-       onPress={adicionarItem}
-       style={{ marginBottom: 50 }}
-       title="Adicionar equipamento"
-       color="#841584"
-     />
-   </View>
- );
+      <Button
+        onPress={adicionarItem}
+        style={{ marginBottom: 50 }}
+        title="Adicionar Cliente"
+        color="#841584"
+      />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
