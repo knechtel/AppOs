@@ -14,7 +14,7 @@ export default function ListaDinamica({ navigation }) {
   const [list, setList] = useState([]);
 
   useEffect(() => {
-    fetch(FIND_ALL_CLIENT) // Exemplo de API pública
+    fetch(FIND_ALL_CLIENT)
       .then((response) => response.json())
       .then((json) => {
         setList(json);
@@ -24,17 +24,8 @@ export default function ListaDinamica({ navigation }) {
       });
   }, []);
 
-  const [novoItem, setNovoItem] = useState("");
-
-  const adicionarItem = (id) => {
-    if (novoItem.trim() === "") return;
-    const novo = { id: Date.now().toString(), nome: novoItem };
-    setItens([...itens, novo]);
-    setNovoItem("");
-  };
   const alertItemName = (item) => {
     console.log("maiquel () ==> " + item.name);
-    //navigation.navigate("Equipment", { paramKey: id });
   };
   const doClient = () => {
     navigation.navigate("FormClient");
