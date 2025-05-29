@@ -60,8 +60,16 @@ export default function FormClient() {
         value={phone}
         onChangeText={setPhone}
       />
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Salvar Cliente"
+          onPress={salvarCliente}
+          color="#841584"
+        />
+        <View style={{ height: 10 }} />
 
-      <Button title="Salvar Cliente" onPress={salvarCliente} color="#841584" />
+        <Button title="Adicionar Equipamento" onPress={salvarCliente} />
+      </View>
     </View>
   );
 }
