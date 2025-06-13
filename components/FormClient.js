@@ -7,7 +7,7 @@ export default function FormClient() {
   const [email, setEmail] = useState("");
   const [rg, setRg] = useState("");
   const [phone, setPhone] = useState("");
-
+  const [id, setId] = useState();
   const salvarCliente = () => {
     if (!name || !email || !rg || !phone) {
       Alert.alert("Erro", "Preencha todos os campos.");
