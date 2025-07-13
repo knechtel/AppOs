@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
-import { FIND_BY_ID_CLIENT } from "../util/url";
+import { FIND_BY_ID_CLIENT, UPDATE_CLIENT_BY_ID } from "../util/url";
 
 export default function FormClient({ route }) {
   const [name, setName] = useState("");
@@ -36,8 +36,32 @@ export default function FormClient({ route }) {
   const salvarCliente = () => {
     if (!name || !email || !rg || !phone) {
       Alert.alert("Erro", "Preencha todos os campos.");
+
       return;
     }
+    const { id } = route.params;
+    fetch(UPDATE_CLIENT_BY_ID, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: id,
+        name: name,
+        address: address,
+        email: email,
+        phone: phone,
+        cpf: rg,
+        rg: "rg",
+      }),
+    }).catch((erro) => {
+      console.error("Erro ao buscar dados:", erro);
+    });
+    setName(name);
+    setAddress(address);
+    setEmail(email);
+    setPhone(phone);
+    setRg(rg);
 
     // Aqui você pode fazer um fetch para a API ou salvar localmente
     console.log({ name, email, rg, phone });
@@ -73,7 +97,7 @@ export default function FormClient({ route }) {
 
       <TextInput
         style={styles.input}
-        placeholder="RG"
+        placeholder="CPF"
         value={rg}
         onChangeText={setRg}
       />
