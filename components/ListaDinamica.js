@@ -12,17 +12,34 @@ import {
 import { FIND_ALL_CLIENT } from "../util/url";
 export default function ListaDinamica({ navigation }) {
   const [list, setList] = useState([]);
+   const [refreshing, setRefreshing] = useState(false);
 
-  useEffect(() => {
-    fetch(FIND_ALL_CLIENT)
-      .then((response) => response.json())
-      .then((json) => {
-        setList(json);
-      })
-      .catch((erro) => {
-        console.error("Erro ao buscar dados:", erro);
-      });
-  }, []);
+   const onRefresh = async () => {
+     setRefreshing(true);
+     await loadClients();
+     setRefreshing(false);
+   };
+
+   const loadClients = async () => {
+     try {
+       const response = await fetch(FIND_ALL_CLIENT);
+       const json = await response.json();
+       setList(json);
+     } catch (erro) {
+       console.error("Erro ao buscar dados:", erro);
+     }
+   };
+   useEffect(() => {
+     fetch(FIND_ALL_CLIENT)
+       .then((response) => response.json())
+       .then((json) => {
+         setList(json);
+       })
+       .catch((erro) => {
+         console.error("Erro ao buscar dados:", erro);
+       });
+     loadClients();
+   }, []);
 
   const alertItemName = (item) => {
     console.log("maiquel () ==> " + item.name);
@@ -38,6 +55,8 @@ export default function ListaDinamica({ navigation }) {
       <FlatList
         data={list}
         keyExtractor={(item) => item.id}
+        refreshing={refreshing}
+        onRefresh={onRefresh}
         renderItem={({ item }) => (
           <TouchableOpacity
             key={item.id}
