@@ -1,13 +1,18 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
 
-export default function FormClient() {
+export default function FormClient({ route }) {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [rg, setRg] = useState("");
   const [phone, setPhone] = useState("");
   const [id, setId] = useState();
+  useEffect(() => {
+    const { id } = route.params;
+    setName(id + "test");
+  }, []);
   const salvarCliente = () => {
     if (!name || !email || !rg || !phone) {
       Alert.alert("Erro", "Preencha todos os campos.");

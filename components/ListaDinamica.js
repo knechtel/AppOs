@@ -26,6 +26,7 @@ export default function ListaDinamica({ navigation }) {
 
   const alertItemName = (item) => {
     console.log("maiquel () ==> " + item.name);
+        navigation.navigate("FormClient", { id: item.id });
   };
   const doClient = () => {
     navigation.navigate("FormClient");
