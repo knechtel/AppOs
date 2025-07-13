@@ -46,7 +46,7 @@ export default function ListaDinamica({ navigation }) {
         navigation.navigate("FormClient", { id: item.id });
   };
   const doClient = () => {
-    navigation.navigate("FormClient");
+    navigation.navigate("FormClient", { id: 0 });
   };
   return (
     <View style={styles.container}>
