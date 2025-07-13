@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
+import { FIND_BY_ID_CLIENT } from "../util/url";
 
 export default function FormClient({ route }) {
   const [name, setName] = useState("");
@@ -11,7 +12,26 @@ export default function FormClient({ route }) {
   const [id, setId] = useState();
   useEffect(() => {
     const { id } = route.params;
-    setName(id + "test");
+    fetch(FIND_BY_ID_CLIENT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: id,
+      }),
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        setName(json.name);
+        setAddress(json.address);
+        setEmail(json.email);
+        setPhone(json.phone);
+        setRg(json.cpf);
+      })
+      .catch((erro) => {
+        console.error("Erro ao buscar dados:", erro);
+      });
   }, []);
   const salvarCliente = () => {
     if (!name || !email || !rg || !phone) {
