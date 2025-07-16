@@ -16,7 +16,7 @@ import {
   FIND_BY_ID_CLIENT,
   FIND_BY_ID_CLIENT_ALL_EQUIPMENT,
   UPDATE_EQUIPMENT,
-} from "../util/urls";
+} from "../util/url";
 
 const FormEquipment = ({ route, navigation }) => {
   const [inputMoeda, setInputMoeda] = useState("0");
