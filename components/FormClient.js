@@ -12,26 +12,30 @@ export default function FormClient({ route }) {
   const [id, setId] = useState();
   useEffect(() => {
     const { id } = route.params;
-    fetch(FIND_BY_ID_CLIENT, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: id,
-      }),
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        setName(json.name);
-        setAddress(json.address);
-        setEmail(json.email);
-        setPhone(json.phone);
-        setRg(json.cpf);
+
+    if (id != 0) {
+      fetch(FIND_BY_ID_CLIENT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: id,
+        }),
       })
-      .catch((erro) => {
-        console.error("Erro ao buscar dados:", erro);
-      });
+        .then((response) => response.json())
+        .then((json) => {
+          setName(json.name);
+          setAddress(json.address);
+          setEmail(json.email);
+          setPhone(json.phone);
+          setRg(json.cpf);
+        })
+        .catch((erro) => {
+          console.error("Erro ao buscar dados:", erro);
+        });
+    }
+    console.log("meu id valor: " + id);
   }, []);
   const salvarCliente = () => {
     if (!name || !email || !rg || !phone) {
@@ -68,6 +72,9 @@ export default function FormClient({ route }) {
     Alert.alert("Sucesso", "Cliente salvo com sucesso!");
   };
 
+  const adicionarEquipamento = () => {
+    Alert.alert("add", "adiciona equipamento");
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.titulo}>Cadastro de Cliente</Text>
@@ -117,7 +124,7 @@ export default function FormClient({ route }) {
         />
         <View style={{ height: 10 }} />
 
-        <Button title="Adicionar Equipamento" onPress={salvarCliente} />
+        <Button title="Adicionar Equipamento" onPress={adicionarEquipamento} />
       </View>
     </View>
   );
