@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
 import { FIND_BY_ID_CLIENT, UPDATE_CLIENT_BY_ID } from "../util/url";
 
-export default function FormClient({ route }) {
+export default function FormClient({ route, navigation }) {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
@@ -74,6 +74,7 @@ export default function FormClient({ route }) {
 
   const adicionarEquipamento = () => {
     Alert.alert("add", "adiciona equipamento");
+    navigation.navigate("FormEquipment", { id: id });
   };
   return (
     <View style={styles.container}>
