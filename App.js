@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import ListaDinamica from "./components/ListaDinamica";
 import FormClient from "./components/FormClient";
+import FormEquipment from "./components/FormEquipment";
 const Stack = createStackNavigator();
 export default function App() {
   return (
@@ -13,6 +14,11 @@ export default function App() {
         <Stack.Screen
           name="FormClient"
           component={FormClient}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="FormEquipment"
+          component={FormEquipment}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
