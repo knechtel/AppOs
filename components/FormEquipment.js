@@ -13,12 +13,11 @@ import { Checkbox } from "react-native-paper";
 import { TextInputMask } from "react-native-masked-text";
 import {
   CREATE_EQUIPMENT,
-  FIND_BY_ID_CLIENT,
   FIND_BY_ID_CLIENT_ALL_EQUIPMENT,
   UPDATE_EQUIPMENT,
 } from "../util/url";
 
-const FormEquipment = ({ route, navigation }) => {
+export default function FormEquipment({ route, navigation }) {
   const [inputMoeda, setInputMoeda] = useState("0");
   const [valorMoeda, setValorMoeda] = useState(0);
   const [novo, setNovo] = useState(false);
@@ -34,15 +33,12 @@ const FormEquipment = ({ route, navigation }) => {
   const [preco, setPreco] = useState("");
   const [equipments, setEquipments] = useState([]);
 
-  handleBack = () => {
-    navigation.reset({
-      index: 0,
-      routes: [{ name: "Tela", params: { paramKey: id } }],
-    });
+  const handleBack = () => {
+    navigation.navigate("FormClient", { id: idClient });
   };
 
   useEffect(() => {
-    valor = route.params.paramKey;
+    const valor = route.params?.valor;
     setIdClient(valor);
     setId(valor);
     setPreco(0.0);
@@ -57,26 +53,16 @@ const FormEquipment = ({ route, navigation }) => {
     })
       .then((response) => response.json())
       .then((json) => {
-        if (json["equipments"].length > 0) {
-          setDescricao(json["equipments"][0].description);
-          setGarantia(json["equipments"][0].garantia);
-          setEntregue(json["equipments"][0].entregue);
-          setModelo(json["equipments"][0].model);
-          setSerial(json["equipments"][0].serial);
-          setMarca(json["equipments"][0].brand);
-          setDefeito(json["equipments"][0]["defectDefectForRepair"]);
-          setPreco(String(json["equipments"][0]["price"]) + ".00");
-          setInputMoeda(String(json["equipments"][0]["price"]) + ".00");
-          setId(json["equipments"][0].id);
-          setNovo(false);
-          setEquipments(json["equipments"]);
-        } else {
-          setNovo(true);
-        }
+        setMarca(json[0].brand);
+        setSerial(json[0].serial);
+        setDefeito(json[0].defect_defect_for_repair);
+        setModelo(json[0].model);
+        setDescricao(json[0].description);
+      })
+      .catch((erro) => {
+        console.error("Erro ao buscar dados:", erro);
       });
-
-    return () => {};
-  }, [route.params.paramKey]);
+  }, []);
 
   const handleSubmit = () => {
     if (equipments.length > 0) {
@@ -201,10 +187,12 @@ const FormEquipment = ({ route, navigation }) => {
         <Text>Garantia</Text>
       </View>
       <Button title="Enviar" onPress={handleSubmit} />
-      <Button title="Voltar" onPress={handleBack} />
+      <View style={{ marginBottom: 40 }}>
+        <Button title="Voltar" onPress={handleBack} />
+      </View>
     </ScrollView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -229,4 +217,3 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FormEquipment;
