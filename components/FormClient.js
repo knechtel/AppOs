@@ -12,7 +12,7 @@ export default function FormClient({ route, navigation }) {
   const [id, setId] = useState();
   useEffect(() => {
     const { id } = route.params;
-
+    setId(id);
     if (id != 0) {
       fetch(FIND_BY_ID_CLIENT, {
         method: "POST",
@@ -74,7 +74,7 @@ export default function FormClient({ route, navigation }) {
 
   const adicionarEquipamento = () => {
     Alert.alert("add", "adiciona equipamento");
-    navigation.navigate("FormEquipment", { id: id });
+    navigation.navigate("FormEquipment", { valor: id });
   };
   return (
     <View style={styles.container}>
