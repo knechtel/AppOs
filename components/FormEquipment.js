@@ -58,6 +58,9 @@ export default function FormEquipment({ route, navigation }) {
         setDefeito(json[0].defect_defect_for_repair);
         setModelo(json[0].model);
         setDescricao(json[0].description);
+        setInputMoeda(json[0].price);
+        setEntregue(json[0].entregue);
+        setGarantia(json[0].garantia);
       })
       .catch((erro) => {
         console.error("Erro ao buscar dados:", erro);
