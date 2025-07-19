@@ -13,7 +13,8 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.maiquel.AppOs"
     },
     "android": {
       "adaptiveIcon": {
@@ -22,15 +23,15 @@
       },
       "edgeToEdgeEnabled": true,
       "package": "com.maiquel.AppOs",
-       "allowHttp": true,
+      "allowHttp": true,
+      "buildType": "apk",
       "permissions": [
-        "INTERNET",     
+        "INTERNET",
         "ACCESS_FINE_LOCATION",
-        "CAMERA",       
+        "CAMERA",
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE"
       ]
-    
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -40,6 +41,15 @@
         "projectId": "aedf2bbb-9de4-47cf-a94e-efb9097d3ee0"
       }
     },
-    "plugins":[ [ "expo-build-properties", { "android": { "usesCleartextTraffic": true } } ] ]
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
+      ]
+    ]
   }
 }
