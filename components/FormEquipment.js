@@ -36,7 +36,9 @@ export default function FormEquipment({ route, navigation }) {
   handleBack = () => {
     navigation.navigate("Clientes");
   };
-
+  handleBackClient = () => {
+    navigation.navigate("FormClient", { id: idClient });
+  };
   useEffect(() => {
     const { valor } = route.params;
     setIdClient(valor);
@@ -166,7 +168,6 @@ export default function FormEquipment({ route, navigation }) {
     }
   };
 
-
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>Formulário de Equipamento</Text>
@@ -239,15 +240,31 @@ export default function FormEquipment({ route, navigation }) {
         />
         <Text>Garantia</Text>
       </View>
-      <Button title="Enviar" onPress={handleSubmit} />
-      <View style={{ marginBottom: 40 }}>
-        <Button title="Voltar" onPress={handleBack} />
+
+      <View style={styles.buttonGroup}>
+        <View style={styles.buttonSpacing}>
+          <Button title="Enviar" onPress={handleSubmit} />
+        </View>
+        <View style={styles.buttonSpacing}>
+          <Button title="Voltar" onPress={handleBack} />
+        </View>
+        <View style={styles.buttonSpacing}>
+          <Button title="Cliente" onPress={handleBackClient} />
+        </View>
       </View>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  buttonGroup: {
+    marginTop: 20,
+    marginBottom: 40,
+  },
+
+  buttonSpacing: {
+    marginVertical: 6, // Espaçamento entre os botões
+  },
   container: {
     padding: 20,
     flexGrow: 1,
