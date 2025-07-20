@@ -6,3 +6,10 @@ export const FIND_BY_ID_CLIENT =
   LOCAL + "/controller/client_controller_by_id.php";
 export const UPDATE_CLIENT_BY_ID =
   LOCAL + "/controller/client_controller_update.php";
+export const FIND_BY_ID_CLIENT_ALL_EQUIPMENT =
+  LOCAL + "/controller/client_controller_by_id_all_equipments.php";
+
+export const UPDATE_EQUIPMENT =
+  LOCAL + "/controller/equipment_controller_update.php";
+export const INSERT_EQUIPMENT =
+  LOCAL + "/controller/equipment_controller_insert.php";
