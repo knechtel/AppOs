@@ -111,8 +111,7 @@ export default function FormEquipment({ route, navigation }) {
         });
 
         const text = await response.text(); // 🔍 resposta como texto puro
-        console.log("Resposta bruta do UPDATE:", text);
-        console.log("idX = " + idX);
+
         // Agora tente transformar em JSON
         let json;
         try {
@@ -121,17 +120,6 @@ export default function FormEquipment({ route, navigation }) {
           console.error("Erro ao converter para JSON:", parseError);
           return;
         }
-        console.log(json);
-        // prossegue se JSON for válido
-        setIdX(json[0].id);
-        setModelo(json[0].model);
-        setMarca(json[0].brand);
-        setSerial(json[0].serial);
-        setDefeito(json[0].defect_defect_for_repair);
-        setDescricao(json[0].description);
-        setInputMoeda(json[0].price);
-        setEntregue(json[0].entregue);
-        setGarantia(json[0].garantia);
 
         alert("Equipamento editado com sucesso!   id = " + idX);
       } catch (erro) {
