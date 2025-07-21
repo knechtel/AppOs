@@ -13,3 +13,5 @@ export const UPDATE_EQUIPMENT =
   LOCAL + "/controller/equipment_controller_update.php";
 export const INSERT_EQUIPMENT =
   LOCAL + "/controller/equipment_controller_insert.php";
+  export const CREATE_CLIENT =
+    LOCAL + "/controller/client_controller_insert.php";
