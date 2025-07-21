@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
-import { FIND_BY_ID_CLIENT, UPDATE_CLIENT_BY_ID } from "../util/url";
+import {
+  CREATE_CLIENT,
+  FIND_BY_ID_CLIENT,
+  UPDATE_CLIENT_BY_ID,
+} from "../util/url";
 
 export default function FormClient({ route, navigation }) {
   const [name, setName] = useState("");
@@ -11,69 +15,97 @@ export default function FormClient({ route, navigation }) {
   const [phone, setPhone] = useState("");
   const [id, setId] = useState();
   useEffect(() => {
-    const { id } = route.params;
-    setId(id);
-    if (id != 0) {
-      fetch(FIND_BY_ID_CLIENT, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: id,
-        }),
-      })
-        .then((response) => response.json())
-        .then((json) => {
-          setName(json.name);
-          setAddress(json.address);
-          setEmail(json.email);
-          setPhone(json.phone);
-          setRg(json.cpf);
+    const fetchData = async () => {
+      const { id } = route.params;
+      setId(id);
+      if (id != 0) {
+        fetch(FIND_BY_ID_CLIENT, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: id,
+          }),
         })
-        .catch((erro) => {
-          console.error("Erro ao buscar dados:", erro);
-        });
-    }
-    console.log("meu id valor: " + id);
+          .then((response) => response.json())
+          .then((json) => {
+            setName(json.name);
+            setAddress(json.address);
+            setEmail(json.email);
+            setPhone(json.phone);
+            setRg(json.cpf);
+          })
+          .catch((erro) => {
+            console.error("Erro ao buscar dados:", erro);
+          });
+      }
+    };
+
+    fetchData();
   }, []);
-  const salvarCliente = () => {
+  const salvarCliente = async () => {
     if (!name || !email || !rg || !phone) {
       Alert.alert("Erro", "Preencha todos os campos.");
 
       return;
     }
     const { id } = route.params;
-    fetch(UPDATE_CLIENT_BY_ID, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: id,
-        name: name,
-        address: address,
-        email: email,
-        phone: phone,
-        cpf: rg,
-        rg: "rg",
-      }),
-    }).catch((erro) => {
-      console.error("Erro ao buscar dados:", erro);
-    });
-    setName(name);
-    setAddress(address);
-    setEmail(email);
-    setPhone(phone);
-    setRg(rg);
+    console.log("id = " + id);
+    if (id == 0) {
+      console.log("inside if ===" + id);
+      const response = await fetch(CREATE_CLIENT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: id,
+          name: name,
+          address: address,
+          email: email,
+          phone: phone,
+          cpf: rg,
+          rg: "rg",
+        }),
+      }).catch((erro) => {
+        console.error("Erro ao buscar dados:", erro);
+      });
 
-    // Aqui você pode fazer um fetch para a API ou salvar localmente
-    console.log({ name, email, rg, phone });
-    Alert.alert("Sucesso", "Cliente salvo com sucesso!");
+      Alert.alert("Sucesso", "Cliente salvo com sucesso!");
+    } else {
+      fetch(UPDATE_CLIENT_BY_ID, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: id,
+          name: name,
+          address: address,
+          email: email,
+          phone: phone,
+          cpf: rg,
+          rg: "rg",
+        }),
+      }).catch((erro) => {
+        console.error("Erro ao buscar dados:", erro);
+      });
+      setName(name);
+      setAddress(address);
+      setEmail(email);
+      setPhone(phone);
+      setRg(rg);
+
+      // Aqui você pode fazer um fetch para a API ou salvar localmente
+      console.log({ name, email, rg, phone });
+      Alert.alert("Sucesso", "Cliente salvo com sucesso!");
+    }
   };
 
   const adicionarEquipamento = () => {
     Alert.alert("add", "adiciona equipamento");
+
     navigation.navigate("FormEquipment", { valor: id });
   };
   return (
