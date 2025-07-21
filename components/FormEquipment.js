@@ -129,42 +129,42 @@ export default function FormEquipment({ route, navigation }) {
         alert("Erro ao editar equipamento.");
       }
     } else {
-      // CREATE
-      // try {
-      //   const response = await fetch(
-      //     "http://sftcode.com/controller/equipment_controller_insert.php",
-      //     {
-      //       method: "POST",
-      //       headers: {
-      //         "Content-Type": "application/json",
-      //       },
-      //       body: JSON.stringify({
-      //         client_id: idClient,
-      //         description: descricao,
-      //         model: modelo,
-      //         serial: serial,
-      //         brand: marca,
-      //         defect_defect_for_repair: defeito,
-      //         price: parseFloat(preco),
-      //         entregue: entregue,
-      //         garantia: garantia,
-      //         devolucao: false,
-      //         autorizado: false,
-      //         pronto: false,
-      //         obs: "",
-      //       }),
-      //     }
-      //   );
-      //   const text = await response.text();
-      //   console.log("Resposta recebida:", text);
-      //   if (!text) {
-      //     throw new Error("Resposta vazia do servidor");
-      //   }
-      //   alert("Equipamento criado com sucesso!");
-      // } catch (error) {
-      //   console.error("Erro ao criar equipamento:", error);
-      //   alert("Erro ao criar equipamento.");
-      // }
+      //  CREATE
+      try {
+        const response = await fetch(
+          "http://sftcode.com/controller/equipment_controller_insert.php",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              client_id: idClient,
+              description: descricao,
+              model: modelo,
+              serial: serial,
+              brand: marca,
+              defect_defect_for_repair: defeito,
+              price: parseFloat(preco),
+              entregue: entregue,
+              garantia: garantia,
+              devolucao: false,
+              autorizado: false,
+              pronto: false,
+              obs: "",
+            }),
+          }
+        );
+        const text = await response.text();
+        console.log("Resposta recebida:", text);
+        if (!text) {
+          throw new Error("Resposta vazia do servidor");
+        }
+        alert("Equipamento criado com sucesso!");
+      } catch (error) {
+        console.error("Erro ao criar equipamento:", error);
+        alert("Erro ao criar equipamento.");
+      }
     }
   };
 
