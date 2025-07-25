@@ -42,7 +42,6 @@ export default function FormEquipment({ route, navigation }) {
   useEffect(() => {
     const { valor } = route.params;
     setIdClient(valor);
-    console.log("valor =  " + valor);
     setPreco(0.0);
     let meuID;
     try {
@@ -72,10 +71,7 @@ export default function FormEquipment({ route, navigation }) {
 
       if (typeof idX === "undefined" || idX == 0) {
         //insert data
-
-        alert("valor = undefined");
       } else {
-        alert("valor = " + idX);
       }
     } catch (error) {
       console.error("Erro ao buscar dados:", error);
