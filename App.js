@@ -42,6 +42,7 @@ function BottomNavegator() {
           title: "Controle de Os",
           tabBarLabel: "Cadastro de Cliente",
         }}
+        initialParams={{ id: 0 }}
       />
     </Tab.Navigator>
   );
