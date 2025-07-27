@@ -82,7 +82,6 @@ export default function FormClient({ route, navigation }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id: id,
           name: name,
           address: address,
           email: email,
@@ -93,7 +92,22 @@ export default function FormClient({ route, navigation }) {
       }).catch((erro) => {
         console.error("Erro ao buscar dados:", erro);
       });
+      const text = await response.text(); // 🔍 resposta como texto puro
+      console.log("olha o text " + text);
+      // Agora tente transformar em JSON
+      let json;
+      try {
+        json = JSON.parse(text);
+        console.log("Resposta da API:", json);
 
+        // PEGANDO O ID RETORNADO
+        const newClientId = json.id;
+        setId(newClientId);
+        console.log("ID do novo cliente:", newClientId);
+      } catch (parseError) {
+        console.error("Erro ao converter para JSON:", parseError);
+        return;
+      }
       Alert.alert("Sucesso", "Cliente salvo com sucesso!");
     } else {
       fetch(UPDATE_CLIENT_BY_ID, {
@@ -126,7 +140,7 @@ export default function FormClient({ route, navigation }) {
   };
 
   const adicionarEquipamento = () => {
-    Alert.alert("add", "adiciona equipamento");
+    Alert.alert("adiciona equipamento, id do cliente: " + id);
 
     navigation.navigate("FormEquipment", { valor: id });
   };
