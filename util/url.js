@@ -1,4 +1,4 @@
-export const LOCAL = "http://www.sftcode.com";
+export const LOCAL = "https://www.sftcode.com";
 export const FIND_ALL_CLIENT = LOCAL + "/controller/client_controller_list.php";
 export const CREATE_EQUIPMENT =
   LOCAL + "/controller/equipment_controller_insert.php";
@@ -14,4 +14,4 @@ export const UPDATE_EQUIPMENT =
 export const INSERT_EQUIPMENT =
   LOCAL + "/controller/equipment_controller_insert.php";
 export const CREATE_CLIENT = LOCAL + "/controller/client_controller_insert.php";
-export const GET_PDF = LOCAL + "/test.php?id=";
+export const GET_PDF = "http://www.sftcode.com" + "/test.php?id=";
