@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
+import * as FileSystem from "expo-file-system";
+import * as Sharing from "expo-sharing";
 import {
   CREATE_CLIENT,
   FIND_BY_ID_CLIENT,
+  GET_PDF,
   UPDATE_CLIENT_BY_ID,
 } from "../util/url";
 
@@ -14,6 +17,25 @@ export default function FormClient({ route, navigation }) {
   const [rg, setRg] = useState("");
   const [phone, setPhone] = useState("");
   const [id, setId] = useState();
+
+  const baixarPDF = async () => {
+    try {
+      const url = GET_PDF + id;
+      const fileUri = FileSystem.documentDirectory + "nota.pdf";
+
+      // Baixa o arquivo
+      const { uri } = await FileSystem.downloadAsync(url, fileUri);
+
+      // Abre a tela de compartilhamento/visualização
+      if (await Sharing.isAvailableAsync()) {
+        await Sharing.shareAsync(uri);
+      } else {
+        alert("Compartilhamento não disponível neste dispositivo");
+      }
+    } catch (err) {
+      console.error("Erro ao baixar PDF:", err);
+    }
+  };
   useEffect(() => {
     const fetchData = async () => {
       const { id } = route.params;
@@ -150,20 +172,36 @@ export default function FormClient({ route, navigation }) {
         onChangeText={setPhone}
       />
       <View style={styles.buttonContainer}>
-        <Button
-          title="Salvar Cliente"
-          onPress={salvarCliente}
-          color="#841584"
-        />
-        <View style={{ height: 10 }} />
+        <View style={styles.buttonWrapper}>
+          <Button
+            title="Salvar Cliente"
+            onPress={salvarCliente}
+            color="#841584"
+          />
+        </View>
 
-        <Button title="Adicionar Equipamento" onPress={adicionarEquipamento} />
+        <View style={styles.buttonWrapper}>
+          <Button
+            title="Adicionar Equipamento"
+            onPress={adicionarEquipamento}
+          />
+        </View>
+
+        <View style={styles.buttonWrapper}>
+          <Button title="Gera PDF" onPress={baixarPDF} color="#841584" />
+        </View>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  buttonContainer: {
+    marginTop: 20,
+  },
+  buttonWrapper: {
+    marginBottom: 12, // Espaço entre os botões
+  },
   container: {
     padding: 20,
     marginTop: 40,
