@@ -66,7 +66,6 @@ export default function FormEquipment({ route, navigation }) {
           setInputMoeda(json[0].price);
           setEntregue(json[0].entregue);
           setGarantia(json[0].garantia);
-          idX = json[0].id;
         });
 
       if (typeof idX === "undefined" || idX == 0) {
@@ -80,11 +79,6 @@ export default function FormEquipment({ route, navigation }) {
   }, []);
 
   const handleSubmit = async () => {
-    console.log("id cliente : " + idClient);
-    console.log("descricao = ", descricao);
-    console.log("idx = " + idX);
-    console.log("modelo = " + modelo);
-
     if (idX != 0) {
       // UPDATE
       try {
