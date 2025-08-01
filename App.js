@@ -6,6 +6,7 @@ import ListaDinamica from "./components/ListaDinamica";
 import FormClient from "./components/FormClient";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import FormEquipment from "./components/FormEquipment";
+import UploadForm from "./components/UploadForm";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -60,6 +61,11 @@ export default function App() {
         <Stack.Screen
           name="FormEquipment"
           component={FormEquipment}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="UploadForm"
+          component={UploadForm}
           options={{ headerShown: false }}
         />
 
