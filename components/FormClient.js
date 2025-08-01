@@ -144,6 +144,10 @@ export default function FormClient({ route, navigation }) {
 
     navigation.navigate("FormEquipment", { valor: id });
   };
+  const uploadClient = () => {
+    if (id != 0) navigation.navigate("UploadForm", { id: id });
+    else alert("Para fazer upload é necessário cadastrar cliente.");
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.titulo}>Cadastro de Cliente</Text>
@@ -199,6 +203,9 @@ export default function FormClient({ route, navigation }) {
             title="Adicionar Equipamento"
             onPress={adicionarEquipamento}
           />
+        </View>
+        <View style={styles.buttonWrapper}>
+          <Button title="Upload" onPress={uploadClient} />
         </View>
 
         <View style={styles.buttonWrapper}>
