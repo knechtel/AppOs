@@ -145,7 +145,7 @@ export default function FormClient({ route, navigation }) {
     navigation.navigate("FormEquipment", { valor: id });
   };
    const toTheImage = () => {
-     navigation.navigate("FormShow");
+     navigation.navigate("FormShow", { id: id });
    };
    const uploadClient = () => {
      if (id != 0) navigation.navigate("UploadForm", { id: id });
