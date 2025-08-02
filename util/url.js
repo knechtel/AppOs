@@ -15,3 +15,6 @@ export const INSERT_EQUIPMENT =
   LOCAL + "/controller/equipment_controller_insert.php";
 export const CREATE_CLIENT = LOCAL + "/controller/client_controller_insert.php";
 export const GET_PDF = "http://www.sftcode.com" + "/test.php?id=";
+export const UPLOAD_CLIENT =
+  "http://sftcode.com" + "/controller/upload_controller.php";
+d;
