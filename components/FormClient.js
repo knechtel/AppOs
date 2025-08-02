@@ -144,76 +144,82 @@ export default function FormClient({ route, navigation }) {
 
     navigation.navigate("FormEquipment", { valor: id });
   };
-  const uploadClient = () => {
-    if (id != 0) navigation.navigate("UploadForm", { id: id });
-    else alert("Para fazer upload é necessário cadastrar cliente.");
-  };
-  return (
-    <View style={styles.container}>
-      <Text style={styles.titulo}>Cadastro de Cliente</Text>
+   const toTheImage = () => {
+     navigation.navigate("FormShow");
+   };
+   const uploadClient = () => {
+     if (id != 0) navigation.navigate("UploadForm", { id: id });
+     else alert("Para fazer upload é necessário cadastrar cliente.");
+   };
+   return (
+     <View style={styles.container}>
+       <Text style={styles.titulo}>Cadastro de Cliente</Text>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Nome"
-        value={name}
-        onChangeText={setName}
-      />
+       <TextInput
+         style={styles.input}
+         placeholder="Nome"
+         value={name}
+         onChangeText={setName}
+       />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Endereço"
-        keyboardType="address"
-        value={address}
-        onChangeText={setAddress}
-      />
+       <TextInput
+         style={styles.input}
+         placeholder="Endereço"
+         keyboardType="address"
+         value={address}
+         onChangeText={setAddress}
+       />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        keyboardType="email-address"
-        value={email}
-        onChangeText={setEmail}
-      />
+       <TextInput
+         style={styles.input}
+         placeholder="Email"
+         keyboardType="email-address"
+         value={email}
+         onChangeText={setEmail}
+       />
 
-      <TextInput
-        style={styles.input}
-        placeholder="CPF"
-        value={rg}
-        onChangeText={setRg}
-      />
+       <TextInput
+         style={styles.input}
+         placeholder="CPF"
+         value={rg}
+         onChangeText={setRg}
+       />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Telefone"
-        keyboardType="phone-pad"
-        value={phone}
-        onChangeText={setPhone}
-      />
-      <View style={styles.buttonContainer}>
-        <View style={styles.buttonWrapper}>
-          <Button
-            title="Salvar Cliente"
-            onPress={salvarCliente}
-            color="#841584"
-          />
-        </View>
+       <TextInput
+         style={styles.input}
+         placeholder="Telefone"
+         keyboardType="phone-pad"
+         value={phone}
+         onChangeText={setPhone}
+       />
+       <View style={styles.buttonContainer}>
+         <View style={styles.buttonWrapper}>
+           <Button
+             title="Salvar Cliente"
+             onPress={salvarCliente}
+             color="#841584"
+           />
+         </View>
 
-        <View style={styles.buttonWrapper}>
-          <Button
-            title="Adicionar Equipamento"
-            onPress={adicionarEquipamento}
-          />
-        </View>
-        <View style={styles.buttonWrapper}>
-          <Button title="Upload" onPress={uploadClient} />
-        </View>
+         <View style={styles.buttonWrapper}>
+           <Button
+             title="Adicionar Equipamento"
+             onPress={adicionarEquipamento}
+           />
+         </View>
+         <View style={styles.buttonWrapper}>
+           <Button title="Upload" onPress={uploadClient} />
+         </View>
 
-        <View style={styles.buttonWrapper}>
-          <Button title="Gera PDF" onPress={baixarPDF} color="#841584" />
-        </View>
-      </View>
-    </View>
-  );
+         <View style={styles.buttonWrapper}>
+           <Button title="Gera PDF" onPress={baixarPDF} color="#841584" />
+         </View>
+         <View style={styles.buttonWrapper}>
+           <Button title="Imagem" onPress={toTheImage} />
+         </View>
+       </View>
+     </View>
+   );
 }
 
 const styles = StyleSheet.create({
