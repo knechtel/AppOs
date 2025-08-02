@@ -1,6 +1,6 @@
 import * as ImagePicker from "expo-image-picker";
 import { useState, useEffect } from "react";
-import { Button, Image,StyleSheet, View } from "react-native";
+import { Alert, Button, Image, StyleSheet, View } from "react-native";
 import { UPLOAD_CLIENT } from "../util/url";
 
 export default function UploadForm({ route }) {
@@ -41,9 +41,12 @@ export default function UploadForm({ route }) {
     });
 
     const data = await res.text();
-    console.log(data);
-    console.log("aqui>>>>>>>>>>>>>>>>>>>>>>>>");
-    console.log("id = ", id);
+
+    if (res.status === 200) {
+      alert("✅ Upload feito com sucesso!");
+    } else {
+      alert("❌ Erro no upload  " + res.status);
+    }
   };
 
   return (
