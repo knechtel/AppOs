@@ -4,10 +4,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web"
+    "start": "expo start --dev-client",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web",
+    "prebuild:android": "echo sdk.dir=$ANDROID_HOME > android/local.properties",
+    "build:android": "eas build --platform android --local"
   },
   "dependencies": {
     "@react-navigation/bottom-tabs": "^7.4.3",
@@ -16,6 +18,7 @@
     "expo": "53.0.20",
     "expo-build-properties": "~0.14.8",
     "expo-file-system": "~18.1.11",
+    "expo-image-picker": "^16.1.4",
     "expo-sharing": "~13.1.5",
     "expo-status-bar": "~2.2.3",
     "react": "19.0.0",
