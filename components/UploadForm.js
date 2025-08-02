@@ -1,6 +1,7 @@
 import * as ImagePicker from "expo-image-picker";
 import { useState, useEffect } from "react";
 import { Button, Image,StyleSheet, View } from "react-native";
+import { UPLOAD_CLIENT } from "../util/url";
 
 export default function UploadForm({ route }) {
   const [image, setImage] = useState();
@@ -31,16 +32,13 @@ export default function UploadForm({ route }) {
       name: `${id}` + ".jpg",
     });
 
-    const res = await fetch(
-      "http://sftcode.com/controller/upload_controller.php",
-      {
-        method: "POST",
-        body: formData,
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
+    const res = await fetch(UPLOAD_CLIENT, {
+      method: "POST",
+      body: formData,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
 
     const data = await res.text();
     console.log(data);
